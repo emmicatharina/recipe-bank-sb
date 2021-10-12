@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleag.org">
+<head>
+    <title>Recipe Bank</title>
+    <meta http-equiv="Content-Type" content="txt/html; charset=UTF-8">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+    <h1>Recipe Bank</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Time</th>
+                <th>Source</th>
+                <th>Link</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each = "recipe : ${recipes}">
+                <td th:text="${recipe.title}"></td>
+                <td th:text="${recipe.time}"></td>
+                <td th:text="${recipe.source}"></td>
+                <td><a th:href="${recipe.link}" th:text="${recipe.link}" target="_blank"></a></td>
+                <td th:text="${recipe.category.name}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="/add">Add recipe</a>
+</body>
+</html>
