@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import fi.server2021.RecipeBank.domain.CategoryRepository;
 import fi.server2021.RecipeBank.domain.Recipe;
@@ -23,11 +24,19 @@ public class RecipeController {
 		return "recipelist";
 	}
 	
-	// Add new book
+	// Add new recipe
 	@GetMapping("/add")
 	public String addRecipe(Model model) {
 		model.addAttribute("recipe", new Recipe());
 		model.addAttribute("categories", crepository.findAll());
 		return "addrecipe";
 	}
+	
+	// Save new recipe
+	@PostMapping("/save")
+	public String saveRecipe(Recipe recipe) {
+		repository.save(recipe);
+		return "redirect:recipelist";
+	}
+	
 }

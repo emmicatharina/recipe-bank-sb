@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleag.org">
+<head>
+    <title>Add a new recipe</title>
+    <meta http-equiv="Content-Type" content="txt/html; charset=UTF-8">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+    <h2>Add a new recipe</h2>
+    <form th:object="${recipe}" th:action="@{save}" action="#" method="post">
+        <label for="title">Title</label>
+        <input type="text" id="title" th:field="*{title}" />
+        <label for="time">Time in minutes</label>
+        <input type="text" id="time" th:field="*{time}" />
+        <label for="source">Source</label>
+        <input type="text" id="source" th:field="*{source}" />
+        <label for="link">Link</label>
+        <input type="text" id="link" th:field="*{link}" />
+        <label for="catlist">Category</label>
+        <select id="catlist" th:field="*{category}" class="form-control">
+            <option th:each="category : ${categories}"
+                    th:value="${category.categoryid}"
+                    th:text="${category.name}"></option>
+        </select>
+        <input class="btn btn-success" type="submit" value="Save" />
+    </form>
+</div>
+</body>
+</html>

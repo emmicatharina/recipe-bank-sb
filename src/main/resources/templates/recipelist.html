@@ -15,15 +15,17 @@
                 <th>Source</th>
                 <th>Link</th>
                 <th>Category</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each = "recipe : ${recipes}">
+            <tr th:each="recipe : ${recipes}">
                 <td th:text="${recipe.title}"></td>
                 <td th:text="${recipe.time}"></td>
                 <td th:text="${recipe.source}"></td>
                 <td><a th:href="${recipe.link}" th:text="${recipe.link}" target="_blank"></a></td>
                 <td th:text="${recipe.category.name}"></td>
+                <td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${recipe.id})}">Delete</a></td>
             </tr>
         </tbody>
     </table>
