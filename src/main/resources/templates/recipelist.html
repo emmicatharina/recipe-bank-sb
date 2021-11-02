@@ -25,7 +25,8 @@
                 <td th:text="${recipe.source}"></td>
                 <td><a th:href="${recipe.link}" th:text="${recipe.link}" target="_blank"></a></td>
                 <td th:text="${recipe.category.name}"></td>
-                <td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${recipe.id})}">Delete</a></td>
+                <td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${recipe.id})}">Delete</a>
+                <a class="btn btn-primary" th:href="@{/edit/{id}(id=${recipe.id})}">Edit</a></td>
             </tr>
         </tbody>
     </table>

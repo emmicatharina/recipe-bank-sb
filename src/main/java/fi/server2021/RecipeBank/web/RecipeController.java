@@ -47,4 +47,12 @@ public class RecipeController {
 		return "redirect:../recipelist";
 	}
 	
+	// Edit recipe
+	@GetMapping("edit/{id}")
+	public String editRecipe(@PathVariable("id") Long recipeId, Model model) {
+		model.addAttribute("recipe", repository.findById(recipeId));
+		model.addAttribute("categories", crepository.findAll());
+		return "editrecipe";
+	}
+	
 }
