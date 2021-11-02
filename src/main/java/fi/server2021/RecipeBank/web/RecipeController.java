@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import fi.server2021.RecipeBank.domain.CategoryRepository;
@@ -37,6 +38,13 @@ public class RecipeController {
 	public String saveRecipe(Recipe recipe) {
 		repository.save(recipe);
 		return "redirect:recipelist";
+	}
+	
+	// Delete recipe
+	@GetMapping("/delete/{id}")
+	public String deleteRecipe(@PathVariable("id") Long recipeId, Model model) {
+		repository.deleteById(recipeId);
+		return "redirect:../recipelist";
 	}
 	
 }
