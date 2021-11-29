@@ -3,10 +3,13 @@ package fi.server2021.RecipeBank.web;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +26,12 @@ public class RecipeController {
 	private RecipeRepository repository;
 	@Autowired
 	private CategoryRepository crepository;
+	
+	// Main page
+	@GetMapping("/index")
+	public String index() {
+		return "index";
+	}
 
 	// List all recipes
 	@GetMapping("/recipelist")
@@ -56,6 +65,7 @@ public class RecipeController {
 	}
 	
 	// Add new recipe
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/add")
 	public String addRecipe(Model model) {
 		model.addAttribute("recipe", new Recipe());
@@ -64,6 +74,7 @@ public class RecipeController {
 	}
 	
 	// Save new recipe
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("/save")
 	public String saveRecipe(Recipe recipe) {
 		repository.save(recipe);
@@ -71,16 +82,16 @@ public class RecipeController {
 	}
 	
 	// Delete recipe
-	@GetMapping("/delete/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
+	@GetMapping("/delete/{id}")
 	public String deleteRecipe(@PathVariable("id") Long recipeId, Model model) {
 		repository.deleteById(recipeId);
 		return "redirect:../recipelist";
 	}
 	
 	// Edit recipe
-	@GetMapping("edit/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
+	@GetMapping("edit/{id}")
 	public String editRecipe(@PathVariable("id") Long recipeId, Model model) {
 		model.addAttribute("recipe", repository.findById(recipeId));
 		model.addAttribute("categories", crepository.findAll());
@@ -88,6 +99,7 @@ public class RecipeController {
 	}
 	
 	// Add new category
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/addcategory")
 	public String addCategory(Model model) {
 		model.addAttribute("category", new Category());
@@ -95,8 +107,12 @@ public class RecipeController {
 	}
 	
 	// Save category
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("/savecategory")
-	public String saveCategory(Category category) {
+	public String saveCategory(@Valid Category category, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			return "addcategory";
+		} 
 		crepository.save(category);
 		return "redirect:recipelist";
 	}

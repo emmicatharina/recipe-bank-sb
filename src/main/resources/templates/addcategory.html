@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleag.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Add a new category</title>
     <meta http-equiv="Content-Type" content="txt/html; charset=UTF-8">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
-<body>
+<body class="bg-light">
 <div class="container">
     <h2>Add a new category</h2>
     <form th:object="${category}" th:action="@{savecategory}" action="#" method="post">
         <label for="name">Name</label>
         <input type="text" id="name" th:field="*{name}" />
         <input class="btn btn-success" type="submit" value="Save" />
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger">Name Error</p>
     </form>
 </div>
 </body>

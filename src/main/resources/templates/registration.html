@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign up to recipe bank</title>
+    <meta http-equiv="Content-Type" content="txt/html: charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+
+</head>
+<body>
+	 <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <div class="login-form bg-light mt-4 p-4">
+                    <form th:object=${registrationInformation} th:action="@{/saveuser}" action="#" method="post" class="row g-3">
+                        <h4>Sign up to create a new account</h4>
+                        <div class="col-12">
+
+                        </div>
+                        <div class="col-12">
+                            <label>Username</label>
+                            <input type="text" th:field="*{username}" class="form-control" placeholder="Username" autofocus="autofocus">
+                            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger">Username Error</p>
+
+                        </div>
+                        <div class="col-12">
+                            <label>Password</label>
+                            <input type="password" th:field="*{password}" class="form-control" placeholder="Password">
+                            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger">Password Error</p>
+
+                        </div>
+                        <div class="col-12">
+                            <label>Re-type password</label>
+                            <input type="password" th:field="*{passwordCheck}" class="form-control" placeholder="Password again">
+                            <p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}" class="alert alert-danger">Password Match Error</p>
+
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-dark float-end">Sign up</button>
+                        </div>
+                    </form>
+                    <hr class="mt-4">
+                    <div class="col-12">
+                        <p class="text-center mb-0">Already have an account? <a href="/login">Log in</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

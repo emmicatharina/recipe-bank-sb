@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleag.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Recipe Bank</title>
     <meta http-equiv="Content-Type" content="txt/html; charset=UTF-8">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
-<body>
+<body class="bg-light">
+<div class="container">
     <h1>Recipe Bank</h1>
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out" class="btn btn-sm btn-danger" />
@@ -28,12 +30,17 @@
                 <td th:text="${recipe.source}"></td>
                 <td><a th:href="${recipe.link}" th:text="${recipe.link}" target="_blank"></a></td>
                 <td th:text="${recipe.category.name}"></td>
-                <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{/delete/{id}(id=${recipe.id})}">Delete</a>
-                <a class="btn btn-primary" th:href="@{/edit/{id}(id=${recipe.id})}">Edit</a></td>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <a class="btn btn-outline-danger btn-sm" th:href="@{/delete/{id}(id=${recipe.id})}">Delete</a>
+                    <a class="btn btn-outline-primary btn-sm" th:href="@{/edit/{id}(id=${recipe.id})}">Edit</a>
+                </td>
             </tr>
         </tbody>
     </table>
-    <a class="btn btn-primary" href="/add">Add recipe</a>
-    <a class="btn btn-primary" href="/addcategory">Add category</a>
+    <p sec:authorize="hasAuthority('ADMIN')">
+        <a class="btn btn-secondary btn-sm" href="/add">Add recipe</a>
+        <a class="btn btn-secondary btn-sm" href="/addcategory">Add category</a>
+    </p>
+</div>
 </body>
 </html>
