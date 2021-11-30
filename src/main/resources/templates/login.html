@@ -13,7 +13,7 @@
 					<form th:action="@{login}" method="post" class="row g-3">
 						<h4>Log in to access recipe bank</h4>
 						<div class="col-12">
-							<p th:if="${loginError}" class="alert alert-danger">Wrong
+							<p th:if="${param.error}" class="alert alert-danger">Wrong
 								username or password!</p>
 						</div>
 						<div class="col-12">

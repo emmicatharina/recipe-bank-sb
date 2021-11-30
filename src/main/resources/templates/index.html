@@ -13,9 +13,11 @@
           <h5>Welcome to Emmi's recipe bank!</h5>
           <p class="lead text-muted">Please log in to access my list of recipes. If you don't have an account, start by creating one now.</p>
           <p>
-            <a href="/recipelist" class="btn btn-primary my-2">Log in</a>
+            <a href="/login" class="btn btn-primary my-2">Log in</a>
             <a href="/register" class="btn btn-secondary my-2">Sign up</a>
           </p>
+
+          <p th:if="${param.logout}" class="alert alert-success">You were logged out successfully!</p>
         </div>
       </section>
     </main>

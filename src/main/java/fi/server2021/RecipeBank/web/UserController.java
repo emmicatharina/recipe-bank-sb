@@ -25,13 +25,6 @@ public class UserController {
 	public String login() {
 		return "login";
 	}
-		
-	//Login form with error
-	@GetMapping("/login-error")
-	public String loginError(Model model) {
-		model.addAttribute("loginError", true);
-		return "login";
-	}
 	
 	@GetMapping("register")
 	public String addUser(Model model) {

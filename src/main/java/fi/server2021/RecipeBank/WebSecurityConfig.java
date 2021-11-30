@@ -27,12 +27,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.formLogin()
 		.loginPage("/login")
-		.failureUrl("/login-error")
 		.defaultSuccessUrl("/recipelist", true)
 		.permitAll()
 		.and()
 		.logout()
-		.logoutSuccessUrl("/index")
+		.logoutSuccessUrl("/index?logout")
 		.permitAll();
 	}
 	
